@@ -25,7 +25,7 @@ float Q_rsqrt(float number, int second_step)
 }
 
 float rsqrt(float number) {
-    return 1. / sqrt(number);
+    return 1.f / sqrtf(number);
 }
 
 int main() {
