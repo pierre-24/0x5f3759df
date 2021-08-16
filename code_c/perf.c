@@ -28,7 +28,13 @@ float Q_rsqrt(float number)
 }
 
 float rsqrt(float number) {
-    return 1.f / sqrtf(number);
+    float res;
+#ifdef USE_rsqrtss
+    asm ("rsqrtss %1, %0" : "=x" (res) : "xm" (number));
+#else
+    res = 1.f / sqrtf(number);
+#endif
+    return res;
 }
 
 int main() {
