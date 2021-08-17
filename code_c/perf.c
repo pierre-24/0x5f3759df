@@ -86,8 +86,8 @@ int main() {
         error += fabs((results_qrsqrt[i] - results_rsqrt[i]) / results_rsqrt[i]);
     }
     
-    printf("Q_rsqrt: %.5f nsecs/op\n", (double) t_qrsqrt / CLOCKS_PER_SEC / N_FLOAT * 1e9);
-    printf("rsqrt: %.5f nsecs/op\n",  (double) t_rsqrt / CLOCKS_PER_SEC / N_FLOAT * 1e9);
+    printf("Q_rsqrt: %.5f nsecs/float\n", (double) t_qrsqrt / CLOCKS_PER_SEC / N_FLOAT * 1e9);
+    printf("rsqrt: %.5f nsecs/float\n",  (double) t_rsqrt / CLOCKS_PER_SEC / N_FLOAT * 1e9);
     printf("erreur moyenne de Q_rsqrt: %.3f pourcents\n", error / N_FLOAT * 100);
     
     free(the_floats);
