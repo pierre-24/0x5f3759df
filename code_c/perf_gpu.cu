@@ -8,14 +8,14 @@
 #include <iostream>
 #include <cuda.h>
 
-#define N_FLOAT 10000000
+#define N_FLOAT 100000000
 #define MAX_FLOAT 1000
 
 __global__ void rsqrt_vec(float* vec_source, int n)
 {
     int i = blockIdx.x*blockDim.x + threadIdx.x;
     if (i < n) // évite les débordements
-        vec_source[i] = 1.f / sqrt(vec_source[i]);
+        vec_source[i] = rsqrtf(vec_source[i]);
 }
 
 int main() {
@@ -60,8 +60,8 @@ int main() {
     auto t_rsqrt = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - before);
     
     std::cout << "Le tout a prit " 
-              << t_rsqrt.count() 
-              << "ns, donc rsqrt: " 
+              << ((double) t_rsqrt.count() / 1e6)
+              << "ms, donc rsqrt: " 
               << ((double) t_rsqrt.count() / N_FLOAT) 
               << " ns/floats" << std::endl;
     
